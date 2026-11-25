@@ -194,6 +194,49 @@ input.invalid{border-color:var(--err);background:#FFF6F5}
 .done b{display:block;font-family:var(--display);text-transform:uppercase;font-size:22px;margin-bottom:4px}
 .done button{margin-top:8px;font:inherit;font-weight:700;background:none;border:0;color:var(--blue);text-decoration:underline;cursor:pointer;padding:0}
 
+/* Bandeau des clubs */
+.clubs{padding-block:clamp(48px,7vw,80px);background:#fff;overflow:hidden}
+.clubs .h2{margin-bottom:clamp(20px,3vw,32px)}
+.marquee{position:relative;overflow:hidden;padding-block:10px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{list-style:none;margin:0;padding:0;display:flex;gap:clamp(28px,4vw,56px);width:max-content;align-items:center;animation:scroll 70s linear infinite}
+.marquee.rtl .track{animation-direction:reverse;animation-duration:64s}
+.marquee:hover .track{animation-play-state:paused}
+.track li{flex:none;display:flex;align-items:center}
+.track img{display:block;height:clamp(56px,7vw,80px);width:auto;max-width:clamp(84px,10vw,124px);object-fit:contain;transition:transform .2s ease}
+.track li:hover img{transform:scale(1.12)}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - clamp(14px,2vw,28px)))}}
+@media (prefers-reduced-motion:reduce){.track{animation:none;flex-wrap:wrap;justify-content:center;width:auto;padding-inline:16px}.track li[aria-hidden],.track li:has(img[aria-hidden]){display:none}.marquee{-webkit-mask-image:none;mask-image:none}}
+
+/* Confirmation */
+.ok-overlay{position:fixed;inset:0;z-index:80;background:rgba(6,14,32,.72);backdrop-filter:blur(4px);display:grid;place-items:center;padding:16px;overflow-y:auto}
+.ok-overlay[hidden]{display:none}
+.ticket{width:100%;max-width:460px;border-radius:24px;overflow:hidden;background:#fff;color:var(--ink);box-shadow:0 40px 80px -30px rgba(0,0,0,.6);animation:pop .35s cubic-bezier(.2,.8,.2,1);margin:auto}
+@keyframes pop{from{transform:translateY(16px) scale(.97);opacity:0}to{transform:none;opacity:1}}
+.ticket-head{background:var(--navy);color:#fff;padding:22px 24px 20px;position:relative}
+.ticket-head::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:14px;background:radial-gradient(circle at 7px 14px,#fff 7px,transparent 7.5px) 0 0/14px 14px repeat-x}
+.ticket-logos{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+.ticket-logos img{height:36px;width:auto}
+.ticket-tag{display:inline-block;font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:14px;color:var(--navy);background:var(--gold);border-radius:999px;padding:3px 12px}
+.ticket-head h3{font-size:34px;font-weight:800;margin:10px 0 6px}
+.ticket-head p{margin:0;color:#C9D5EA;font-size:15px}
+.ticket-body{padding:24px}
+.ticket-club{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:26px;color:var(--navy);line-height:1.05}
+.ticket-club small{display:block;font-family:var(--body);text-transform:none;font-weight:600;font-size:15px;color:var(--muted);margin-top:2px}
+.ticket-teams{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
+.ticket-teams li{display:flex;align-items:center;gap:12px;background:var(--mist);border-radius:12px;padding:10px 12px;font-weight:600;font-size:15px;line-height:1.25}
+.ticket-teams .cat{min-width:64px;font-size:18px}
+.ticket-teams small{display:block;color:var(--muted);font-weight:500;text-transform:uppercase;font-size:13px;letter-spacing:.03em}
+.ticket-total{display:flex;justify-content:space-between;align-items:baseline;border-top:2px dashed var(--line);margin-top:16px;padding-top:14px;font-weight:700}
+.ticket-total b{font-family:var(--display);font-size:30px;color:var(--navy)}
+.ticket-next{margin:16px 0 0;padding:0 0 0 20px;color:var(--muted);font-size:15px;display:grid;gap:4px}
+.ticket-next b{color:var(--ink)}
+.ticket-actions{display:grid;gap:10px;margin-top:20px}
+.ticket-actions>.btn{font-size:18px;white-space:nowrap}
+.ticket-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ticket-row .btn{font-size:17px;padding:12px 10px}
+.linkbtn{font:inherit;font-size:15px;font-weight:700;background:none;border:0;color:var(--blue);text-decoration:underline;cursor:pointer;padding:6px}
+.linkbtn.muted{color:var(--muted);text-decoration:none}
+
 /* Contact */
 .contact{display:grid;grid-template-columns:.9fr 1.1fr;border-radius:22px;overflow:hidden;background:var(--navy);color:#fff}
 .contact .photo{min-height:320px;position:relative}
@@ -291,6 +334,17 @@ footer b{color:#fff}
         </div>
       </div>
     </div>
+  </section>
+
+
+  <!-- CLUBS DÉJÀ VENUS -->
+  <section class="clubs" aria-labelledby="t-clubs">
+    <div class="wrap">
+      <p class="eyebrow">Ils sont déjà venus</p>
+      <h2 class="h2" id="t-clubs">Plus de 35 clubs ont joué la Lamine</h2>
+    </div>
+    <div class="marquee ltr"><ul class="track"><li><img src="img/clubs/academie-bakore-cisse.webp" alt="Académie Bakhore Cissé" title="Académie Bakhore Cissé" width="151" height="180" decoding="async"></li><li><img src="img/clubs/ag-caen-foot.webp" alt="Avant Garde Caennaise" title="Avant Garde Caennaise" width="180" height="180" decoding="async"></li><li><img src="img/clubs/as-chemin-vert.webp" alt="ASL Chemin Vert" title="ASL Chemin Vert" width="125" height="180" decoding="async"></li><li><img src="img/clubs/as-cormeillais-foot.webp" alt="ACS Cormeillais" title="ACS Cormeillais" width="180" height="180" decoding="async"></li><li><img src="img/clubs/as-saint-vigor.webp" alt="AS Saint-Vigor-le-Grand" title="AS Saint-Vigor-le-Grand" width="116" height="160" decoding="async"></li><li><img src="img/clubs/basly.webp" alt="AF Basly" title="AF Basly" width="181" height="180" decoding="async"></li><li><img src="img/clubs/ca-lisieux.webp" alt="CA Lisieux" title="CA Lisieux" width="148" height="180" decoding="async"></li><li><img src="img/clubs/elbeuf.webp" alt="École de Football Elbeuf" title="École de Football Elbeuf" width="184" height="180" decoding="async"></li><li><img src="img/clubs/evreux-foot.webp" alt="Évreux FC 27" title="Évreux FC 27" width="180" height="180" decoding="async"></li><li><img src="img/clubs/fc-rouen.webp" alt="FC Rouen" title="FC Rouen" width="152" height="180" decoding="async"></li><li><img src="img/clubs/frileuse.webp" alt="SC Frileuse Le Havre" title="SC Frileuse Le Havre" width="156" height="180" decoding="async"></li><li><img src="img/clubs/grand-quevilly-foot.webp" alt="Grand Quevilly FC" title="Grand Quevilly FC" width="181" height="180" decoding="async"></li><li><img src="img/clubs/js-douvres.webp" alt="JS Douvres" title="JS Douvres" width="150" height="180" decoding="async"></li><li><img src="img/clubs/mondeville-foot-logo.webp" alt="Mondeville" title="Mondeville" width="105" height="180" decoding="async"></li><li><img src="img/clubs/normanville.webp" alt="ES Normanville" title="ES Normanville" width="180" height="180" decoding="async"></li><li><img src="img/clubs/pont-leveque-foot.webp" alt="US Pont-l'Évêque" title="US Pont-l'Évêque" width="149" height="180" decoding="async"></li><li><img src="img/clubs/qrm.webp" alt="QRM" title="QRM" width="145" height="180" decoding="async"></li><li><img src="img/clubs/sm-caen.webp" alt="Stade Malherbe Caen" title="Stade Malherbe Caen" width="135" height="180" decoding="async"></li><li><img src="img/clubs/us-gueriniere.webp" alt="US Guérinière" title="US Guérinière" width="179" height="180" decoding="async"></li><li><img src="img/clubs/academie-bakore-cisse.webp" aria-hidden="true" alt="Académie Bakhore Cissé" title="Académie Bakhore Cissé" width="151" height="180" decoding="async"></li><li><img src="img/clubs/ag-caen-foot.webp" aria-hidden="true" alt="Avant Garde Caennaise" title="Avant Garde Caennaise" width="180" height="180" decoding="async"></li><li><img src="img/clubs/as-chemin-vert.webp" aria-hidden="true" alt="ASL Chemin Vert" title="ASL Chemin Vert" width="125" height="180" decoding="async"></li><li><img src="img/clubs/as-cormeillais-foot.webp" aria-hidden="true" alt="ACS Cormeillais" title="ACS Cormeillais" width="180" height="180" decoding="async"></li><li><img src="img/clubs/as-saint-vigor.webp" aria-hidden="true" alt="AS Saint-Vigor-le-Grand" title="AS Saint-Vigor-le-Grand" width="116" height="160" decoding="async"></li><li><img src="img/clubs/basly.webp" aria-hidden="true" alt="AF Basly" title="AF Basly" width="181" height="180" decoding="async"></li><li><img src="img/clubs/ca-lisieux.webp" aria-hidden="true" alt="CA Lisieux" title="CA Lisieux" width="148" height="180" decoding="async"></li><li><img src="img/clubs/elbeuf.webp" aria-hidden="true" alt="École de Football Elbeuf" title="École de Football Elbeuf" width="184" height="180" decoding="async"></li><li><img src="img/clubs/evreux-foot.webp" aria-hidden="true" alt="Évreux FC 27" title="Évreux FC 27" width="180" height="180" decoding="async"></li><li><img src="img/clubs/fc-rouen.webp" aria-hidden="true" alt="FC Rouen" title="FC Rouen" width="152" height="180" decoding="async"></li><li><img src="img/clubs/frileuse.webp" aria-hidden="true" alt="SC Frileuse Le Havre" title="SC Frileuse Le Havre" width="156" height="180" decoding="async"></li><li><img src="img/clubs/grand-quevilly-foot.webp" aria-hidden="true" alt="Grand Quevilly FC" title="Grand Quevilly FC" width="181" height="180" decoding="async"></li><li><img src="img/clubs/js-douvres.webp" aria-hidden="true" alt="JS Douvres" title="JS Douvres" width="150" height="180" decoding="async"></li><li><img src="img/clubs/mondeville-foot-logo.webp" aria-hidden="true" alt="Mondeville" title="Mondeville" width="105" height="180" decoding="async"></li><li><img src="img/clubs/normanville.webp" aria-hidden="true" alt="ES Normanville" title="ES Normanville" width="180" height="180" decoding="async"></li><li><img src="img/clubs/pont-leveque-foot.webp" aria-hidden="true" alt="US Pont-l'Évêque" title="US Pont-l'Évêque" width="149" height="180" decoding="async"></li><li><img src="img/clubs/qrm.webp" aria-hidden="true" alt="QRM" title="QRM" width="145" height="180" decoding="async"></li><li><img src="img/clubs/sm-caen.webp" aria-hidden="true" alt="Stade Malherbe Caen" title="Stade Malherbe Caen" width="135" height="180" decoding="async"></li><li><img src="img/clubs/us-gueriniere.webp" aria-hidden="true" alt="US Guérinière" title="US Guérinière" width="179" height="180" decoding="async"></li></ul></div>
+    <div class="marquee rtl"><ul class="track"><li><img src="img/clubs/academie-isidore.webp" alt="Académie Isidore Formation" title="Académie Isidore Formation" width="180" height="180" decoding="async"></li><li><img src="img/clubs/argentan.webp" alt="FC Argentan" title="FC Argentan" width="180" height="180" decoding="async"></li><li><img src="img/clubs/as-cherbourg.webp" alt="AS Cherbourg" title="AS Cherbourg" width="180" height="180" decoding="async"></li><li><img src="img/clubs/as-ifs.webp" alt="AS Ifs" title="AS Ifs" width="184" height="180" decoding="async"></li><li><img src="img/clubs/astdv.webp" alt="AS Trouville-Deauville-Villers" title="AS Trouville-Deauville-Villers" width="180" height="180" decoding="async"></li><li><img src="img/clubs/bbb.webp" alt="USM Blainville" title="USM Blainville" width="208" height="180" decoding="async"></li><li><img src="img/clubs/cormelles.webp" alt="ES Cormelles" title="ES Cormelles" width="203" height="180" decoding="async"></li><li><img src="img/clubs/es-falaise.webp" alt="ESFC Falaise" title="ESFC Falaise" width="180" height="180" decoding="async"></li><li><img src="img/clubs/f-thaon.webp" alt="FC Thaon Bretteville-le-Fresne" title="FC Thaon Bretteville-le-Fresne" width="222" height="180" decoding="async"></li><li><img src="img/clubs/fc-val-d-europe.webp" alt="Val d'Europe FC" title="Val d'Europe FC" width="209" height="180" decoding="async"></li><li><img src="img/clubs/gavenchon.webp" alt="CSG Football" title="CSG Football" width="138" height="168" decoding="async"></li><li><img src="img/clubs/hac.webp" alt="HAC" title="HAC" width="150" height="180" decoding="async"></li><li><img src="img/clubs/limay-foot.webp" alt="ALJ Limay" title="ALJ Limay" width="129" height="180" decoding="async"></li><li><img src="img/clubs/municipaux-le-havre.webp" alt="Municipaux Le Havre" title="Municipaux Le Havre" width="180" height="180" decoding="async"></li><li><img src="img/clubs/paris-acasa.webp" alt="Paris Acasa Futsal" title="Paris Acasa Futsal" width="180" height="180" decoding="async"></li><li><img src="img/clubs/portaise-foot.webp" alt="ES Portaise" title="ES Portaise" width="129" height="180" decoding="async"></li><li><img src="img/clubs/saint-ouen-foot.webp" alt="Saint-Ouen" title="Saint-Ouen" width="136" height="180" decoding="async"></li><li><img src="img/clubs/su-dives-cabourg.webp" alt="SU Dives-Cabourg" title="SU Dives-Cabourg" width="142" height="180" decoding="async"></li><li><img src="img/clubs/academie-isidore.webp" aria-hidden="true" alt="Académie Isidore Formation" title="Académie Isidore Formation" width="180" height="180" decoding="async"></li><li><img src="img/clubs/argentan.webp" aria-hidden="true" alt="FC Argentan" title="FC Argentan" width="180" height="180" decoding="async"></li><li><img src="img/clubs/as-cherbourg.webp" aria-hidden="true" alt="AS Cherbourg" title="AS Cherbourg" width="180" height="180" decoding="async"></li><li><img src="img/clubs/as-ifs.webp" aria-hidden="true" alt="AS Ifs" title="AS Ifs" width="184" height="180" decoding="async"></li><li><img src="img/clubs/astdv.webp" aria-hidden="true" alt="AS Trouville-Deauville-Villers" title="AS Trouville-Deauville-Villers" width="180" height="180" decoding="async"></li><li><img src="img/clubs/bbb.webp" aria-hidden="true" alt="USM Blainville" title="USM Blainville" width="208" height="180" decoding="async"></li><li><img src="img/clubs/cormelles.webp" aria-hidden="true" alt="ES Cormelles" title="ES Cormelles" width="203" height="180" decoding="async"></li><li><img src="img/clubs/es-falaise.webp" aria-hidden="true" alt="ESFC Falaise" title="ESFC Falaise" width="180" height="180" decoding="async"></li><li><img src="img/clubs/f-thaon.webp" aria-hidden="true" alt="FC Thaon Bretteville-le-Fresne" title="FC Thaon Bretteville-le-Fresne" width="222" height="180" decoding="async"></li><li><img src="img/clubs/fc-val-d-europe.webp" aria-hidden="true" alt="Val d'Europe FC" title="Val d'Europe FC" width="209" height="180" decoding="async"></li><li><img src="img/clubs/gavenchon.webp" aria-hidden="true" alt="CSG Football" title="CSG Football" width="138" height="168" decoding="async"></li><li><img src="img/clubs/hac.webp" aria-hidden="true" alt="HAC" title="HAC" width="150" height="180" decoding="async"></li><li><img src="img/clubs/limay-foot.webp" aria-hidden="true" alt="ALJ Limay" title="ALJ Limay" width="129" height="180" decoding="async"></li><li><img src="img/clubs/municipaux-le-havre.webp" aria-hidden="true" alt="Municipaux Le Havre" title="Municipaux Le Havre" width="180" height="180" decoding="async"></li><li><img src="img/clubs/paris-acasa.webp" aria-hidden="true" alt="Paris Acasa Futsal" title="Paris Acasa Futsal" width="180" height="180" decoding="async"></li><li><img src="img/clubs/portaise-foot.webp" aria-hidden="true" alt="ES Portaise" title="ES Portaise" width="129" height="180" decoding="async"></li><li><img src="img/clubs/saint-ouen-foot.webp" aria-hidden="true" alt="Saint-Ouen" title="Saint-Ouen" width="136" height="180" decoding="async"></li><li><img src="img/clubs/su-dives-cabourg.webp" aria-hidden="true" alt="SU Dives-Cabourg" title="SU Dives-Cabourg" width="142" height="180" decoding="async"></li></ul></div>
   </section>
 
   <!-- L'ESSENTIEL -->
@@ -425,12 +479,38 @@ footer b{color:#fff}
           <button class="btn btn-wa" type="submit" data-via="wa"><svg><use href="#i-wa"/></svg>Envoyer par WhatsApp</button>
         </div>
         <p class="note">Votre application d'e-mail ou WhatsApp s'ouvre avec le message prêt : il ne reste qu'à appuyer sur « Envoyer ».</p>
-        <div class="done" id="done" role="status">
-          <b>Presque fini !</b>
-          Vérifiez que le message est bien parti. Valentin Saquet vous recontactera avec le RIB et les informations complémentaires.
-          <br><button type="button" id="copy">Le message ne s'est pas ouvert ? Copier le récapitulatif</button>
-        </div>
       </form>
+
+      <!-- Écran de confirmation -->
+      <div class="ok-overlay" id="okOverlay" hidden>
+        <div class="ticket" role="dialog" aria-modal="true" aria-labelledby="okTitle">
+          <div class="ticket-head">
+            <div class="ticket-logos"><img src="img/logo-lamine-blanc.png" alt="" width="34" height="36"><img src="img/logo-sch.png" alt="" width="40" height="40"></div>
+            <div class="ticket-tag">Lamine Futsal Cup 2027</div>
+            <h3 id="okTitle">Votre demande est prête&nbsp;!</h3>
+            <p id="okSub">Il ne vous reste qu'à appuyer sur « Envoyer » dans votre messagerie.</p>
+          </div>
+          <div class="ticket-body">
+            <div class="ticket-club"><span id="okClub"></span><small id="okVille"></small></div>
+            <ul class="ticket-teams" id="okTeams"></ul>
+            <div class="ticket-total"><span>Total estimé</span><b id="okTotal"></b></div>
+            <ol class="ticket-next">
+              <li><b>Envoyez</b> le message qui vient de s'ouvrir.</li>
+              <li><b>Valentin vous répond</b> avec le RIB et les infos pratiques.</li>
+              <li><b>Réglez</b> l'inscription : votre place est alors confirmée.</li>
+            </ol>
+            <div class="ticket-actions">
+              <button type="button" class="btn btn-gold btn-block" id="okCal"><svg><use href="#i-cal"/></svg>Ajouter à mon agenda</button>
+              <div class="ticket-row">
+                <button type="button" class="btn btn-mail" id="okMail"><svg><use href="#i-mail"/></svg>E-mail</button>
+                <button type="button" class="btn btn-wa" id="okWa"><svg><use href="#i-wa"/></svg>WhatsApp</button>
+              </div>
+              <button type="button" class="linkbtn" id="copy">Le message ne s'est pas ouvert ? Copier le récapitulatif</button>
+              <button type="button" class="linkbtn muted" id="okClose">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -444,8 +524,8 @@ footer b{color:#fff}
           <h2 class="name" id="t-contact">Valentin Saquet</h2>
           <div class="role">Responsable du tournoi</div>
           <div class="btns">
-            <a class="btn btn-mail btn-block" href="mailto:valentinsaquet@hotmail.com?subject=Renseignements%20%E2%80%93%20Lamine%20Futsal%20Cup%202027&amp;body=Bonjour%20Valentin%2C%0A%0AJe%20souhaite%20avoir%20des%20renseignements%20concernant%20l'inscription%20%C3%A0%20la%20Lamine%20Futsal%20Cup%202027.%0A%0A"><svg><use href="#i-mail"/></svg>Envoyer un e-mail</a>
-            <a class="btn btn-wa btn-block" href="https://wa.me/33761592294?text=Bonjour%2C%20je%20souhaite%20avoir%20des%20renseignements%20concernant%20l'inscription%20%C3%A0%20la%20Lamine%20Futsal%20Cup%202027." target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Écrire sur WhatsApp</a>
+            <a class="btn btn-mail btn-block" href="mailto:valentinsaquet@hotmail.com?subject=%E2%9A%BD%20Renseignements%20%E2%80%93%20Lamine%20Futsal%20Cup%202027&amp;body=Bonjour%20Valentin%2C%0A%0AJe%20souhaite%20avoir%20des%20renseignements%20concernant%20l%27inscription%20%C3%A0%20la%20Lamine%20Futsal%20Cup%202027.%0A%0AClub%20%3A%20%0ACat%C3%A9gorie%28s%29%20%3A%20%0AMa%20question%20%3A%20%0A%0ASportivement%2C%0A"><svg><use href="#i-mail"/></svg>Envoyer un e-mail</a>
+            <a class="btn btn-wa btn-block" href="https://wa.me/33761592294?text=%2A%E2%9A%BD%20Lamine%20Futsal%20Cup%202027%2A%0ABonjour%20Valentin%20%F0%9F%91%8B%0AJe%20souhaite%20avoir%20des%20renseignements%20concernant%20l%27inscription.%0A%0AClub%20%3A%20%0ACat%C3%A9gorie%28s%29%20%3A%20" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Écrire sur WhatsApp</a>
           </div>
           <div class="lines">E-mail : <a href="mailto:valentinsaquet@hotmail.com">valentinsaquet@hotmail.com</a><br>Téléphone : <a href="tel:+33761592294">07 61 59 22 94</a></div>
         </div>
@@ -463,7 +543,7 @@ footer b{color:#fff}
 
 <div class="mbar">
   <a class="btn btn-gold" href="#inscription">S'inscrire</a>
-  <a class="btn btn-wa" href="https://wa.me/33761592294?text=Bonjour%2C%20je%20souhaite%20avoir%20des%20renseignements%20concernant%20l'inscription%20%C3%A0%20la%20Lamine%20Futsal%20Cup%202027." target="_blank" rel="noopener" aria-label="Contacter Valentin Saquet sur WhatsApp"><svg><use href="#i-wa"/></svg></a>
+  <a class="btn btn-wa" href="https://wa.me/33761592294?text=%2A%E2%9A%BD%20Lamine%20Futsal%20Cup%202027%2A%0ABonjour%20Valentin%20%F0%9F%91%8B%0AJe%20souhaite%20avoir%20des%20renseignements%20concernant%20l%27inscription.%0A%0AClub%20%3A%20%0ACat%C3%A9gorie%28s%29%20%3A%20" target="_blank" rel="noopener" aria-label="Contacter Valentin Saquet sur WhatsApp"><svg><use href="#i-wa"/></svg></a>
 </div>
 
 <script>
@@ -471,13 +551,13 @@ footer b{color:#fff}
   var EMAIL = "valentinsaquet@hotmail.com";
   var WA = "33761592294";
   var CATS = [
-    {c:"U6/U7", d:"Samedi 20 février", s:"Matin"},
-    {c:"U8",    d:"Dimanche 21 février", s:"Matin"},
-    {c:"U9",    d:"Samedi 6 mars", s:"Matin"},
-    {c:"U10",   d:"Samedi 20 février", s:"Semi-nocturne"},
-    {c:"U11",   d:"Samedi 6 mars", s:"Semi-nocturne"},
-    {c:"U12",   d:"Dimanche 21 février", s:"Semi-nocturne"},
-    {c:"U13",   d:"Dimanche 7 mars", s:"Journée"}
+    {c:"U6/U7", d:"Samedi 20 février", s:"Matin", iso:"20270220"},
+    {c:"U8",    d:"Dimanche 21 février", s:"Matin", iso:"20270221"},
+    {c:"U9",    d:"Samedi 6 mars", s:"Matin", iso:"20270306"},
+    {c:"U10",   d:"Samedi 20 février", s:"Semi-nocturne", iso:"20270220"},
+    {c:"U11",   d:"Samedi 6 mars", s:"Semi-nocturne", iso:"20270306"},
+    {c:"U12",   d:"Dimanche 21 février", s:"Semi-nocturne", iso:"20270221"},
+    {c:"U13",   d:"Dimanche 7 mars", s:"Journée", iso:"20270307"}
   ];
   var teams = document.getElementById("teams");
   CATS.forEach(function(t, i){
@@ -507,35 +587,67 @@ footer b{color:#fff}
 
   function val(n){ var f=form.elements[n]; return f ? f.value.trim() : ""; }
 
-  function recap(){
-    var ids = picked(), n = ids.length, p = price(n);
-    var L = [];
-    L.push("Bonjour Valentin,");
-    L.push("");
-    L.push("Je souhaite inscrire notre club à la Lamine Futsal Cup 2027.");
-    L.push("");
-    L.push("CLUB");
-    L.push("- Club : "+val("club"));
-    L.push("- Ville : "+val("ville"));
-    L.push("- Responsable : "+val("responsable"));
-    L.push("- Téléphone : "+val("tel"));
-    L.push("- E-mail : "+val("email"));
-    L.push("");
-    L.push("ÉQUIPES ENGAGÉES ("+n+")");
+  var SITE = "scherouville.github.io/lamine-futsal-cup-2027";
+  var LINE = "━━━━━━━━━━━━━━━━━━━━";
+
+  function totalLabel(n, p){
+    if(p===-1) return n+" équipes, tarif à convenir avec vous";
+    return p+" €"+(n===3?" (offre club 3 équipes)":"");
+  }
+  function eduOf(i){ return [val("edu"+i), val("edutel"+i)].filter(Boolean).join(" · "); }
+
+  /* E-mail : texte brut soigné (les messageries n'acceptent pas de mise en page via un lien) */
+  function mailText(){
+    var ids = picked(), n = ids.length, p = price(n), L = [];
+    L.push("Bonjour Valentin,","");
+    L.push("Le club "+val("club")+" ("+val("ville")+") souhaite s'inscrire à la Lamine Futsal Cup 2027 🏆","");
+    L.push(LINE,"🏟️  LE CLUB",LINE);
+    L.push("Club : "+val("club"));
+    L.push("Ville : "+val("ville"));
+    L.push("Responsable : "+val("responsable"));
+    L.push("📞 "+val("tel"));
+    L.push("✉️ "+val("email"),"");
+    L.push(LINE,"⚽  NOS ÉQUIPES ("+n+")",LINE);
     ids.forEach(function(i){
-      var t = CATS[i], e = val("edu"+i), et = val("edutel"+i);
-      var line = "- "+t.c+" · "+t.d+" ("+t.s.toLowerCase()+")";
-      if(e || et) line += " · Éducateur : "+[e,et].filter(Boolean).join(", ");
-      L.push(line);
+      var t = CATS[i], e = eduOf(i);
+      L.push("▸ "+t.c+" — "+t.d+" · "+t.s.toLowerCase());
+      if(e) L.push("   Éducateur : "+e);
     });
-    L.push("");
-    L.push("TOTAL ESTIMÉ : "+(p===-1 ? "plus de 3 équipes, tarif à convenir" : p+" €"));
-    L.push("");
-    L.push("J'ai pris connaissance des conditions d'engagement. Merci de me transmettre le RIB et les informations complémentaires.");
-    L.push("");
-    L.push(val("responsable"));
+    L.push("",LINE,"💶  TOTAL ESTIMÉ : "+totalLabel(n,p),LINE,"");
+    L.push("✅ Nous avons pris connaissance des conditions d'engagement (licences 2026/2027, encadrant licencié et majeur, 7 joueurs maximum, 6 en U7).","");
+    L.push("Merci de nous transmettre le RIB et les informations complémentaires pour finaliser l'inscription.","");
+    L.push("Sportivement,",val("responsable"),val("club"),"");
+    L.push("—","Envoyé depuis le site d'inscription de la Lamine Futsal Cup 2027",SITE);
     return L.join("\n");
   }
+
+  /* WhatsApp : gras, italique et émojis natifs */
+  function waText(){
+    var ids = picked(), n = ids.length, p = price(n), L = [];
+    L.push("*⚽ LAMINE FUTSAL CUP 2027*","_Demande d'inscription_","");
+    L.push("Bonjour Valentin 👋");
+    L.push("Le club *"+val("club")+"* ("+val("ville")+") souhaite s'inscrire au tournoi.","");
+    L.push("*🏟️ Le club*");
+    L.push("Responsable : "+val("responsable"));
+    L.push("📞 "+val("tel"));
+    L.push("✉️ "+val("email"),"");
+    L.push("*⚽ Nos équipes ("+n+")*");
+    ids.forEach(function(i){
+      var t = CATS[i], e = eduOf(i);
+      L.push("• *"+t.c+"* – "+t.d+", "+t.s.toLowerCase());
+      if(e) L.push("   _Éducateur : "+e+"_");
+    });
+    L.push("","*💶 Total estimé : "+totalLabel(n,p)+"*","");
+    L.push("✅ Conditions d'engagement lues et acceptées.");
+    L.push("Merci de m'envoyer le RIB et les infos complémentaires 🙏","");
+    L.push("_"+val("responsable")+" · "+val("club")+"_");
+    return L.join("\n");
+  }
+
+  function mailUrl(){
+    return "mailto:"+EMAIL+"?subject="+encodeURIComponent("⚽ Inscription Lamine Futsal Cup 2027 – "+val("club"))+"&body="+encodeURIComponent(mailText());
+  }
+  function waUrl(){ return "https://wa.me/"+WA+"?text="+encodeURIComponent(waText()); }
 
   function check(){
     var errs = [];
@@ -564,6 +676,67 @@ footer b{color:#fff}
     f.addEventListener("input", function(){ f.classList.remove("invalid"); });
   });
 
+  /* Mémorise les coordonnées du club sur cet appareil (pratique pour revenir) */
+  var KEY = "lfc27-club";
+  try{
+    var saved = JSON.parse(localStorage.getItem(KEY) || "null");
+    if(saved) ["club","ville","responsable","tel","email"].forEach(function(n){ if(saved[n] && !form.elements[n].value) form.elements[n].value = saved[n]; });
+  }catch(_){}
+  function remember(){
+    try{ var o={}; ["club","ville","responsable","tel","email"].forEach(function(n){ o[n]=val(n); }); localStorage.setItem(KEY, JSON.stringify(o)); }catch(_){}
+  }
+
+  var overlay = document.getElementById("okOverlay");
+  function esc(t){ return String(t).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+  function openOk(via){
+    var ids = picked(), n = ids.length, p = price(n);
+    document.getElementById("okClub").textContent = val("club");
+    document.getElementById("okVille").textContent = val("ville")+" · "+val("responsable");
+    document.getElementById("okTeams").innerHTML = ids.map(function(i){
+      var t = CATS[i];
+      return '<li><span class="cat">'+esc(t.c)+'</span><span>'+esc(t.d)+'<small>'+esc(t.s)+'</small></span></li>';
+    }).join("");
+    document.getElementById("okTotal").textContent = p===-1 ? "À convenir" : p+" €";
+    document.getElementById("okSub").textContent = via==="wa"
+      ? "WhatsApp s'est ouvert avec votre message : appuyez sur « Envoyer »."
+      : "Votre messagerie s'est ouverte avec l'e-mail prêt : appuyez sur « Envoyer ».";
+    overlay.hidden = false;
+    document.body.style.overflow = "hidden";
+    document.getElementById("okCal").focus({preventScroll:true});
+  }
+  function closeOk(){ overlay.hidden = true; document.body.style.overflow = ""; }
+  document.getElementById("okClose").addEventListener("click", closeOk);
+  overlay.addEventListener("click", function(e){ if(e.target===overlay) closeOk(); });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape" && !overlay.hidden) closeOk(); });
+  document.getElementById("okMail").addEventListener("click", function(){ window.location.href = mailUrl(); });
+  document.getElementById("okWa").addEventListener("click", function(){ window.open(waUrl(), "_blank", "noopener"); });
+
+  /* Fichier agenda (.ics) : un événement par catégorie engagée */
+  document.getElementById("okCal").addEventListener("click", function(){
+    var ids = picked(), stamp = new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d+Z$/,"Z");
+    function next(d){ var y=+d.slice(0,4), m=+d.slice(4,6)-1, j=+d.slice(6,8); var x=new Date(Date.UTC(y,m,j+1)); return x.toISOString().slice(0,10).replace(/-/g,""); }
+    function clean(t){ return t.replace(/\\/g,"\\\\").replace(/;/g,"\;").replace(/,/g,"\\,"); }
+    var ev = ids.map(function(i){
+      var t = CATS[i];
+      return ["BEGIN:VEVENT",
+        "UID:lfc27-"+t.c.replace("/","")+"-"+stamp+"@scherouville",
+        "DTSTAMP:"+stamp,
+        "DTSTART;VALUE=DATE:"+t.iso,
+        "DTEND;VALUE=DATE:"+next(t.iso),
+        "SUMMARY:"+clean("⚽ Lamine Futsal Cup 2027 – "+t.c+" ("+t.s.toLowerCase()+")"),
+        "LOCATION:"+clean("Gymnase Laporte, Hérouville-Saint-Clair"),
+        "DESCRIPTION:"+clean("Créneau : "+t.s+". Présentez-vous à l'entrée du gymnase au moins 30 minutes avant le début de votre compétition. Chaussures de salle et protège-tibias. Contact : Valentin Saquet, 07 61 59 22 94."),
+        "END:VEVENT"].join("\r\n");
+    });
+    var ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//SC Herouville//Lamine Futsal Cup 2027//FR","CALSCALE:GREGORIAN","METHOD:PUBLISH"].concat(ev).concat(["END:VCALENDAR"]).join("\r\n");
+    var blob = new Blob([ics], {type:"text/calendar;charset=utf-8"});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = "lamine-futsal-cup-2027.ics";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+    this.innerHTML = '<svg><use href="#i-check"/></svg>Ajouté : ouvrez le fichier';
+  });
+
   var via = "mail";
   form.querySelectorAll("button[type=submit]").forEach(function(b){
     b.addEventListener("click", function(){ via = b.getAttribute("data-via"); });
@@ -572,24 +745,20 @@ footer b{color:#fff}
   form.addEventListener("submit", function(e){
     e.preventDefault();
     if(!check()) return;
-    var text = recap();
-    if(via === "wa"){
-      window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(text), "_blank", "noopener");
-    } else {
-      var subject = "Inscription Lamine Futsal Cup 2027 – "+val("club");
-      window.location.href = "mailto:"+EMAIL+"?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(text);
-    }
-    document.getElementById("done").classList.add("show");
+    remember();
+    if(via === "wa"){ window.open(waUrl(), "_blank", "noopener"); }
+    else { window.location.href = mailUrl(); }
+    setTimeout(function(){ openOk(via); }, 250);
   });
 
   document.getElementById("copy").addEventListener("click", function(){
-    var text = recap(), btn = this;
-    function ok(){ btn.textContent = "Récapitulatif copié : collez-le dans un e-mail à "+EMAIL; }
-    if(navigator.clipboard){ navigator.clipboard.writeText(text).then(ok, fallback); } else { fallback(); }
+    var text = mailText(), btn = this;
+    function ok(){ btn.textContent = "✅ Récapitulatif copié : collez-le dans un e-mail à "+EMAIL; }
     function fallback(){
       var ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select();
       try{ document.execCommand("copy"); ok(); }catch(_){} document.body.removeChild(ta);
     }
+    if(navigator.clipboard){ navigator.clipboard.writeText(text).then(ok, fallback); } else { fallback(); }
   });
 })();
 </script>
